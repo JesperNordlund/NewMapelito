@@ -21,7 +21,7 @@ public class MapelitoObserver implements Observer{
 
 	@Override
 	public void update() {
-		if(Mapelito.getInstance().getState() == 2) {
+		if(Mapelito.getInstance().getState().equals(State.addMapObject)) {
 			MenuPanel.getInstance().initialize();
 		}
 		

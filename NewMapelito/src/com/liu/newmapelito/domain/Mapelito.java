@@ -6,7 +6,7 @@ import com.liu.newmapelito.ui.swing.MapWindow;
 public class Mapelito implements Subject{
 	
 	private static Mapelito instance;
-	private int state = 1;
+	private State state = State.browsingState;
 	private Observer observer;
 
 	
@@ -24,11 +24,11 @@ public class Mapelito implements Subject{
         return instance;
     }
 
-	public int getState() {
+	public State getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(State state) {
 		this.state = state;
 		notifyObserver();
 	}
@@ -68,7 +68,6 @@ public class Mapelito implements Subject{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 		
 
 }

@@ -11,34 +11,37 @@ public class MapObjectFactory {
         return instance;
     }
 	
-	public MapObject getObject(ObjectType type) {
+    /**
+     * Returns a map object of chosen type
+     * @param objectType
+     * @param posX
+     * @param posY
+     * @return
+     */
+	public MapObject createObject(ObjectType objectType, int posX, int posY) {
 		
-		if(type == null) {
+		if(objectType == null) {
 			return null;
 		}
 		
-		if(type == ObjectType.TOILET) {
-			return new MapObject(type);
+		if(objectType == ObjectType.TOILET) {
+			return new MapObject(objectType, posX, posY);
 		}
-		if(type == ObjectType.FOUNTAIN) {
-			return new MapObject(type);
+		if(objectType == ObjectType.FOUNTAIN) {
+			return new MapObject(objectType, posX, posY);
 		}
-		if(type == ObjectType.DRINKING_FOUNTAIN) {
-			return new MapObject(type);
+		if(objectType == ObjectType.MONUMENT) {
+			return new MapObject(objectType, posX, posY);
 		}
-		if(type == ObjectType.STATUE) {
-			return new MapObject(type);
+		if(objectType == ObjectType.HANDICAP_TOILET) {
+			return new MapObject(objectType, posX, posY);
 		}
-		if(type == ObjectType.HANDICAP_TOILET) {
-			return new MapObject(type);
-		}
-		if(type == ObjectType.PARKBENCH) {
-			return new MapObject(type);
+		if(objectType == ObjectType.PARKBENCH) {
+			return new MapObject(objectType, posX, posY);
 		}
 		
 		return null;
-		
-		
+				
 	}
 	
 

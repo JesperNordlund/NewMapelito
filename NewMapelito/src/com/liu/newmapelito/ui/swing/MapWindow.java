@@ -9,10 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.liu.newmapelito.domain.Mapelito;
+import com.liu.newmapelito.domain.State;
 
 public class MapWindow implements Runnable{
 	
-private static MapWindow instance;
+	private static MapWindow instance;
 
 	
 	private JFrame frame = null;
@@ -20,6 +21,13 @@ private static MapWindow instance;
 	
 	private int mouseX;
 	private int mouseY;
+	
+	public static synchronized MapWindow getInstance(){
+        if(instance == null){
+            instance = new MapWindow();
+        }
+        return instance;
+    }
 
 
 	public MapWindow() {
@@ -70,28 +78,22 @@ private static MapWindow instance;
 				mouseX = mc.getX();
 				mouseY = mc.getY();
 				System.out.println("MouseCoordinates: x = " + mouseX + " y = " + mouseY);
-				Mapelito.getInstance().setState(2);//state number 2 is menu state and state number 1 is the normal running state
+				Mapelito.getInstance().setState(State.addMapObject);//state number 2 is menu state and state number 1 is the normal running state
 				
 			}
 		});
 
-		if(Mapelito.getInstance().getState() == 2) {
-			MenuPanel.getInstance().initialize();
-			frame.repaint();
-		}else {
-			setPanel(null);
-			frame.repaint();
-		}
 		
 	}
 	
-    public static synchronized MapWindow getInstance(){
-        if(instance == null){
-            instance = new MapWindow();
-        }
-        return instance;
-    }
+    
+    public void showMenuPanel() {
+    	
+    		JPanel panel = MenuPanel.getInstance();
+    		setPanel(panel);
+    		frame.repaint();
 	
+    }
 	
 	public JFrame getFrame() {
 		return frame;
