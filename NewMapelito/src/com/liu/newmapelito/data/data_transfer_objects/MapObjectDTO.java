@@ -17,20 +17,35 @@ public class MapObjectDTO {
     }
     
     /**
-     * Asks the database broker for a list of all objects of chosen type
+     * Asks the database broker for a list of all objects
+     * and loads them onto the map.
      * @param objectType
      * @return 
      */
-    public List<MapObject> getMapObjects(ObjectType objectType) {
-    	return DatabaseBroker.getInstance().getListOf(objectType);
+    public List<MapObject> loadAllMapObjects() {
+    	return DatabaseBroker.getInstance().getEmAll();
+    }
+    
+    /**
+     * Asks the database broker for a list of all objects of specified type
+     * @param objectType
+     * @return
+     */
+    public List<MapObject> loadMapObjectByType(ObjectType objectType) {
+    	return DatabaseBroker.getInstance().getObjectByType();
     }
    
     /**
-     * Saves the object for long term storage through the database broker
+     * Saves the object for long term storage via a database broker
      * @param mapObject
      */
     public void saveMapObject(MapObject mapObject) {
 		DatabaseBroker.getInstance().saveObject(mapObject);
 	}
+    
+    public MapObject getMapObjectById(int Id) {
+    	
+    	return MapObject;
+    }
 
 }

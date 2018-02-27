@@ -1,20 +1,23 @@
 package com.liu.newmapelito.domain;
 
 
+import java.util.List;
+
+import com.liu.newmapelito.ui.Presenter;
 import com.liu.newmapelito.ui.swing.MapWindow;
 
 public class Mapelito implements Subject{
 	
 	private static Mapelito instance;
 	private State state = State.browsingState;
-	private Observer observer;
+	private List<Observer> observers;
 
 	
 	private MapWindow map;
 	
 	public Mapelito() {
 		attachObserver(MapelitoObserver.getInstance());
-		MapelitoObserver.getInstance().setSubject(this);
+		attachObserver(Presenter.getInstance());
 	}
 	
 	public static synchronized Mapelito getInstance(){
@@ -31,6 +34,7 @@ public class Mapelito implements Subject{
 	public void setState(State state) {
 		this.state = state;
 		notifyObserver();
+		
 	}
 	
 	@Override
@@ -48,19 +52,21 @@ public class Mapelito implements Subject{
 
 	@Override
 	public void attachObserver(Observer o) {
-		observer = MapelitoObserver.getInstance();
-		MapelitoObserver.getInstance().setSubject(this);
+		observers.add(o);
+		o.setSubject(this);
+		
 	}
 
 	@Override
 	public void detachObserver(Observer o) {
-		// TODO Auto-generated method stub
+		observers.remove(o);
 		
 	}
 
 	@Override
 	public void notifyObserver() {
-            observer.update();		
+		for(Observer o : observers)
+            o.update();		
 	}
 
 	@Override

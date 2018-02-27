@@ -1,7 +1,5 @@
 package com.liu.newmapelito.domain;
 
-import com.liu.newmapelito.ui.swing.MenuPanel;
-
 public class MapelitoObserver implements Observer{
 	
 	private Subject subject;
@@ -21,11 +19,11 @@ public class MapelitoObserver implements Observer{
 
 	@Override
 	public void update() {
-		if(Mapelito.getInstance().getState().equals(State.addMapObject)) {
-			MenuPanel.getInstance().initialize();
+		
+			
 		}
 		
-	}
+	
 
 	@Override
 	public void setSubject(Subject subject) {

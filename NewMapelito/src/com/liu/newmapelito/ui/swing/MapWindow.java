@@ -1,15 +1,20 @@
 package com.liu.newmapelito.ui.swing;
 
+import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.liu.newmapelito.data.data_transfer_objects.MapObjectDTO;
 import com.liu.newmapelito.domain.Mapelito;
 import com.liu.newmapelito.domain.State;
+import com.liu.newmapelito.domain.objects.MapObject;
 
 public class MapWindow implements Runnable{
 	
@@ -17,7 +22,10 @@ public class MapWindow implements Runnable{
 
 	
 	private JFrame frame = null;
+	private JPanel content = null;
 	private JPanel panel = null;
+	private JButton button = null;
+	private List<MapObject> mapObjects;
 	
 	private int mouseX;
 	private int mouseY;
@@ -32,20 +40,30 @@ public class MapWindow implements Runnable{
 
 	public MapWindow() {
 		run();
+		addButton();
+		showPanel(MenuPanel.getInstance());
+		fillWithObjects();
 	}
 	
-	public void run() {
+
+
+
+	private void fillWithObjects() {
+		mapObjects = MapObjectDTO.getInstance().loadAllMapObjects();
 		
+	}
+
+
+	public void run() {
+
 		frame = new JFrame("Mapelito");
-		frame.setContentPane(new JLabel(new ImageIcon("valla.png")));
+		frame.setContentPane(new JLabel(new ImageIcon("valla.jpg")));
 		frame.pack();
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		if(panel != null) {
-			frame.getContentPane().add(panel);
-		}
+
+		content = new JPanel();
 		
 		frame.addMouseListener(new MouseListener() {
 			
@@ -82,18 +100,53 @@ public class MapWindow implements Runnable{
 				
 			}
 		});
-
-		
 	}
-	
-    
-    public void showMenuPanel() {
-    	
-    		JPanel panel = MenuPanel.getInstance();
-    		setPanel(panel);
-    		frame.repaint();
-	
-    }
+
+		public void addButton() {
+		
+		button = new JButton();
+		button.setText("Add map object");
+		button.setSize(150, 25);
+		frame.add(button);
+		
+		button.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Mapelito.getInstance().setState(State.addMapObject);
+				
+			}
+		});
+	}
+		
+		public void removeButton() {
+			frame.remove(button);
+		}
+
 	
 	public JFrame getFrame() {
 		return frame;
@@ -107,8 +160,9 @@ public class MapWindow implements Runnable{
 		return panel;
 	}
 
-	public void setPanel(JPanel panel) {
+	public void showPanel(JPanel panel) {
 		this.panel = panel;
+		frame.setContentPane(panel);
 	}
 
 	
@@ -126,6 +180,12 @@ public class MapWindow implements Runnable{
 
 	public void setMouseY(int mouseY) {
 		this.mouseY = mouseY;
+	}
+
+
+	public void removePanel() {
+		frame.remove(panel);
+		
 	}
 
 	
