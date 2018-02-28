@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.liu.newmapelito.data.data_transfer_objects.MapObjectDTO;
+import com.liu.newmapelito.data.data_facade.MapObjectDTO;
 import com.liu.newmapelito.domain.Mapelito;
 import com.liu.newmapelito.domain.State;
 import com.liu.newmapelito.domain.objects.MapObject;
@@ -22,7 +22,6 @@ public class MapWindow implements Runnable{
 
 	
 	private JFrame frame = null;
-	private JPanel content = null;
 	private JPanel panel = null;
 	private JButton button = null;
 	private List<MapObject> mapObjects;
@@ -41,8 +40,6 @@ public class MapWindow implements Runnable{
 	public MapWindow() {
 		run();
 		addButton();
-		showPanel(MenuPanel.getInstance());
-		fillWithObjects();
 	}
 	
 
@@ -57,13 +54,12 @@ public class MapWindow implements Runnable{
 	public void run() {
 
 		frame = new JFrame("Mapelito");
-		frame.setContentPane(new JLabel(new ImageIcon("valla.jpg")));
+		frame.setContentPane(new JLabel(new ImageIcon("C:\\Users\\hafase\\eclipse-workspace\\NewMapelito-master.zip_expanded\\NewMapelito-master\\NewMapelito\\valla.jpg")));
 		frame.pack();
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		content = new JPanel();
 		
 		frame.addMouseListener(new MouseListener() {
 			

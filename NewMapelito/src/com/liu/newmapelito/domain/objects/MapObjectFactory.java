@@ -25,19 +25,19 @@ public class MapObjectFactory {
 		}
 		
 		if(objectType == ObjectType.TOILET) {
-			return new MapObject(objectType, posX, posY);
+			return new Toilet(posX, posY);
 		}
 		if(objectType == ObjectType.FOUNTAIN) {
-			return new MapObject(objectType, posX, posY);
+			return new Fountain(posX, posY);
 		}
 		if(objectType == ObjectType.MONUMENT) {
-			return new MapObject(objectType, posX, posY);
+			return new Monument(posX, posY);
 		}
 		if(objectType == ObjectType.HANDICAP_TOILET) {
-			return new MapObject(objectType, posX, posY);
+			return new HandicapToilet(posX, posY);
 		}
 		if(objectType == ObjectType.PARKBENCH) {
-			return new MapObject(objectType, posX, posY);
+			return new Parkbench(posX, posY);
 		}
 		
 		return null;

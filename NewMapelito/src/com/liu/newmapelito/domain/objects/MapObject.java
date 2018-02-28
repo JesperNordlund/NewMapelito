@@ -3,24 +3,14 @@ package com.liu.newmapelito.domain.objects;
 
 public class MapObject {
 	
-	private ObjectType objectType;
 	private int posX;
 	private int posY;
 	
-	public MapObject(ObjectType objectType, int posX, int posY) {
-		this.objectType = objectType;
+	public MapObject(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
 	}
-	
-	
-	
-	public ObjectType getObjectType() {
-		return objectType;
-	}
-	public void setObjectType(ObjectType objectType) {
-		this.objectType = objectType;
-	}
+
 	public int getPosX() {
 		return posX;
 	}
@@ -33,6 +23,11 @@ public class MapObject {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-
+	
+	public String printDescription() {
+		String description = null;
+		return description;
+		
+	}
 	
 }

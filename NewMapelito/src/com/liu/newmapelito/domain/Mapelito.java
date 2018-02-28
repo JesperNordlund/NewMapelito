@@ -3,7 +3,7 @@ package com.liu.newmapelito.domain;
 
 import java.util.List;
 
-import com.liu.newmapelito.ui.Presenter;
+import com.liu.newmapelito.domain.observer.Presenter;
 import com.liu.newmapelito.ui.swing.MapWindow;
 
 public class Mapelito implements Subject{
@@ -13,11 +13,9 @@ public class Mapelito implements Subject{
 	private List<Observer> observers;
 
 	
-	private MapWindow map;
-	
 	public Mapelito() {
-		attachObserver(MapelitoObserver.getInstance());
 		attachObserver(Presenter.getInstance());
+
 	}
 	
 	public static synchronized Mapelito getInstance(){
@@ -34,6 +32,7 @@ public class Mapelito implements Subject{
 	public void setState(State state) {
 		this.state = state;
 		notifyObserver();
+		System.out.println("State changed to" + state);
 		
 	}
 	
@@ -42,18 +41,12 @@ public class Mapelito implements Subject{
 		return "Mapelito is in" + state;
 	}
 
-	public MapWindow getMap() {
-		return map;
-	}
-
-	public void setMap(MapWindow map) {
-		this.map = map;
-	}
 
 	@Override
 	public void attachObserver(Observer o) {
 		observers.add(o);
 		o.setSubject(this);
+		System.out.println("Observer attached");
 		
 	}
 
